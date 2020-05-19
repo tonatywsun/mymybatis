@@ -5,10 +5,10 @@ import com.yang.dao.entry.City;
 import java.util.List;
 
 /**
- * @Description: 一级缓存的mapper
+ * @Description: 开启二级缓存的Mapper
  * @Author: tona.sun
- * @Date: 2020/05/18 17:47
+ * @Date: 2020/05/19 11:30
  */
-public interface CityMapper {
+public interface City2Mapper {
     List<City> selectAll();
 }
