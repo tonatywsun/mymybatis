@@ -5,7 +5,6 @@ import com.yang.dao.mapper.City2Mapper;
 import com.yang.dao.mapper.City3Mapper;
 import com.yang.dao.mapper.CityMapper;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -21,7 +20,19 @@ import java.util.List;
  */
 public class Application {
     public static void main(String[] args) throws IOException {
-        LogFactory.useLog4JLogging();
+        //不需要开启也能执行日志 mybatis+log4j能打印日志
+        /*
+         *  org.apache.ibatis.logging.LogFactory
+         *  static {
+         *     tryImplementation(LogFactory::useSlf4jLogging);  //不会实例化
+         *     tryImplementation(LogFactory::useCommonsLogging);//不会实例化 JakartaCommonsLogging JCL
+         *     tryImplementation(LogFactory::useLog4J2Logging);//不会实例化
+         *     tryImplementation(LogFactory::useLog4JLogging); //会实例化，所以可以用到Log4J打印日志
+         *     tryImplementation(LogFactory::useJdkLogging);
+         *     tryImplementation(LogFactory::useNoLogging);
+         *   }
+         */
+        //LogFactory.useLog4JLogging();
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
